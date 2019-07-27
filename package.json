@@ -1,0 +1,49 @@
+{
+  "name": "igm-analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -r @babel/register -r regenerator-runtime/runtime src/data.test.js | tap-nirvana",
+    "start": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "choices.js": "^7.0.0",
+    "classnames": "^2.2.6",
+    "core-js": "^3.1.4",
+    "d3": "^5.9.7",
+    "mathjs": "^6.0.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-transition-group": "^4.2.1",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.1.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
+    "postcss-easings": "^2.0.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-nesting": "^7.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "riteway": "^6.0.3",
+    "style-loader": "^0.23.1",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "tap-nirvana": "^1.1.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  }
+}

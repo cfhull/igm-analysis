@@ -1,0 +1,20 @@
+.choices {
+  cursor: default;
+  width: 100%;
+
+  & .choices__inner {
+    cursor: default;
+  }
+
+  & .choices__item {
+    cursor: default;
+  }
+
+  & .choices__list--dropdown {
+    word-break: inherit;
+
+    & .choices__item--selectable {
+      padding-right: inherit;
+    }
+  }
+}

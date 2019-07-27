@@ -1,0 +1,43 @@
+table {
+  width: 100%;
+  border-spacing: 0;
+
+  & th,
+  & td {
+    padding: 5px 10px;
+
+    &.text {
+      text-align: left;
+    }
+
+    &.number {
+      text-align: right;
+    }
+  }
+
+  & th {
+    text-align: left;
+    border-bottom: 1px solid var(--accent-color-secondary);
+    white-space: nowrap;
+    font-size: 1.25em;
+    position: sticky;
+    top: 0px;
+    background-color: var(--bg-color);
+
+    & svg {
+      margin-left: 0.25em;
+    }
+
+    &:hover {
+      background-color: var(--accent-color-primary);
+    }
+  }
+
+  & td {
+    border-bottom: 1px solid var(--accent-color-primary-transparent);
+  }
+
+  & tbody tr.selectable:hover {
+    background-color: var(--accent-color-primary);
+  }
+}
