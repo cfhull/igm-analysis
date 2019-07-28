@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node -r @babel/register -r regenerator-runtime/runtime src/data.test.js | tap-nirvana",
+    "test": "node -r @babel/register -r regenerator-runtime/runtime src/**/*.test.js | tap-nirvana",
     "start": "webpack-dev-server"
   },
   "author": "",
