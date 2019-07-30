@@ -5,6 +5,8 @@ table {
   & th,
   & td {
     padding: 5px 10px;
+    cursor: default;
+    user-select: none;
 
     &.text {
       text-align: left;

@@ -106,7 +106,7 @@ const createBarChart = ({
       .attr('transform', `translate(0, ${height})`)
       .call(d3.axisBottom(xScale))
 
-    yAxis.call(d3.axisLeft(yScale))
+    yAxis.call(d3.axisLeft(yScale).ticks(5))
 
     gradientPrimary.attr('y1', yScale(100)).attr('y2', yScale(0))
 

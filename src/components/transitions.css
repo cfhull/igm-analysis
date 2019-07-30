@@ -1,0 +1,51 @@
+.slide {
+  transform: translate(calc(-100% - 20px));
+
+  &-enter-active {
+    transform: translateX(0%);
+    transition: transform 300ms easeInBack;
+  }
+
+  &-exit {
+    transform: translate(calc(-100% - 20px));
+    transition: transform 300ms easeInBack;
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.expand-enter div {
+  overflow-y: hidden;
+  max-height: 0;
+}
+
+.expand-enter-active div {
+  max-height: 50px;
+  transition: transform 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.expand-exit div {
+  max-height: 50px;
+}
+
+.expand-exit-active div {
+  max-height: 0;
+  overflow-y: hidden;
+  transition: all 500ms ease-in;
+}

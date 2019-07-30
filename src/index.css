@@ -24,6 +24,56 @@ body {
   height: 100vh;
   padding: 20px;
 
+  & .help {
+    & .info {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: scale(1) translate(-50%, 100px);
+      transform-origin: top right;
+      transition: transform 500ms, position 500ms;
+    }
+
+    & .icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+
+    &.collapsed {
+      & .info {
+        top: 10px;
+        right: 10px;
+        transform: scale(0);
+      }
+
+      & .icon {
+        opacity: 1;
+
+        &:hover {
+          color: var(--accent-color-primary);
+        }
+      }
+    }
+  }
+
+  & .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & h1 {
+      margin: 0;
+    }
+
+    & h2 {
+      margin: 0 0 20px 0;
+      font-style: italic;
+    }
+  }
+
   & .chart-container {
     margin: 0 auto;
   }
@@ -39,7 +89,7 @@ body {
       min-width: 300px;
 
       & .chart-container {
-        height: 70%;
+        height: 80%;
       }
 
       & .question {

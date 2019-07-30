@@ -5,33 +5,30 @@ export default function useBarChart(selectedQuestion, isWeighted, onBarClick) {
   const [chart, setChart] = useState()
 
   useEffect(() => {
-    let newChart
     if (!selectedQuestion) {
-      if (chart) {
-        newChart = chart.update(initData(isWeighted))
-        return
-      }
-      newChart = createBarChart({
-        data: initData(isWeighted),
-        selector: '#bar-chart',
-        onBarClick,
-      })
-    } else {
-      const data = selectedQuestion.responses.reduce((a, b) => {
-        const value = isWeighted ? +b.confidence : 1
-        const d = a.find(a => a.label === b.vote)
-        if (d) d.value += value
-        return a
-      }, initData(isWeighted))
-
-      const total = isWeighted
-        ? data.reduce((a, b) => (a += b.value), 0)
-        : selectedQuestion.responses.length
-
-      data.forEach(d => (d.value = Math.round((d.value / total) * 100)))
-
-      newChart = chart.update(data)
+      setChart(null)
+      return
     }
+    const data = selectedQuestion.responses.reduce((a, b) => {
+      const value = isWeighted ? +b.confidence : 1
+      const d = a.find(a => a.label === b.vote)
+      if (d) d.value += value
+      return a
+    }, initData(isWeighted))
+
+    const total = isWeighted
+      ? data.reduce((a, b) => (a += b.value), 0)
+      : selectedQuestion.responses.length
+
+    data.forEach(d => (d.value = Math.round((d.value / total) * 100)))
+
+    const newChart = chart
+      ? chart.update(data)
+      : createBarChart({
+          data,
+          selector: '#bar-chart',
+          onBarClick,
+        })
 
     setChart(newChart)
   }, [selectedQuestion, isWeighted])

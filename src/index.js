@@ -2,6 +2,7 @@ import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import classNames from 'classnames'
 import igm from './igmdata.json'
 import Choices from 'choices.js'
 import '../node_modules/choices.js/public/assets/styles/choices.min.css'
@@ -11,9 +12,12 @@ import useBarChart from './effects/useBarChart.js'
 import Table from './components/table.js'
 import './index.css'
 import { SwitchTransition } from 'react-transition-group'
-import { SlideTransition } from './components/transitions'
+import { SlideTransition, FadeTransition } from './components/transitions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowLeft,
+  faQuestionCircle,
+} from '@fortawesome/free-solid-svg-icons'
 
 const App = () => {
   const [questions, setQuestions] = useState(wrangleQuestions(igm))
@@ -21,6 +25,11 @@ const App = () => {
   const [tableType, setTableType] = useState('questions')
   const [voteFilter, setVoteFilter] = useState()
   const [isWeighted, setIsWeighted] = useState(false)
+  const [isHelpOpen, setIsHelpOpen] = useState(true)
+
+  useEffect(() => {
+    if (selectedQuestion) setIsHelpOpen(false)
+  }, [selectedQuestion])
 
   useBarChart(selectedQuestion, isWeighted, data => {
     setVoteFilter(data)
@@ -46,21 +55,68 @@ const App = () => {
   }, [])
 
   const rowClickHandler = id => {
+    setIsHelpOpen(false)
     setSelectedQuestion(questions.find(q => q.id === id))
   }
 
   return (
     <div id="app">
+      <div className="header">
+        <h1>IGM Economic Experts Panel</h1>
+        <h2>An Exploratory Vizualization Tool</h2>
+      </div>
+      <div className={classNames('help', { collapsed: !isHelpOpen })}>
+        <div className="info">
+          <div>
+            <p>
+              This tool uses data scraped from the{' '}
+              <a href="http://www.igmchicago.org/igm-economic-experts-panel">
+                IGM Economic Experts Panel
+              </a>
+              .
+            </p>
+            <p>
+              The IGM Forum surveys participating economists on a number of
+              economic related questions.
+            </p>
+            <p>
+              By scraping the data we are able to do some additional analysis.
+              For instance, each question below has a Consensus Ratio associated
+              with it, which is a calculation of how much consensus there is on
+              an answer to any given question.
+            </p>
+            <p>
+              A rating of 1 indicates full consensus on an issue, while ratings
+              approaching 0 indicate low consensus.
+            </p>
+            <p>Select a question below to begin</p>
+          </div>
+        </div>
+        <div className="icon">
+          <FontAwesomeIcon
+            icon={faQuestionCircle}
+            onClick={() => {
+              if (!isHelpOpen) {
+                setIsHelpOpen(true)
+                setTableType('questions')
+                setSelectedQuestion(null)
+              }
+            }}
+          />
+        </div>
+      </div>
       <div className="charts">
         <div className="question-container">
-          <div className="chart-container">
-            <svg id={'bar-chart'}></svg>
-          </div>
-          <p className="question">
-            {selectedQuestion
-              ? selectedQuestion.question
-              : 'Select a question from below'}
-          </p>
+          {selectedQuestion && (
+            <div>
+              <div className="chart-container">
+                <svg id={'bar-chart'}></svg>
+              </div>
+              <p className="question">
+                {selectedQuestion && selectedQuestion.question}
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className="controls">
