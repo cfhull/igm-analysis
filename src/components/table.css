@@ -37,6 +37,7 @@ table {
 
   & td {
     border-bottom: 1px solid var(--accent-color-primary-transparent);
+    font-size: 14px;
   }
 
   & tbody tr.selectable:hover {
